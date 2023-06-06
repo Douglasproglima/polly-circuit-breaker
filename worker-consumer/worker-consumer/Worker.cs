@@ -27,7 +27,7 @@ namespace worker_consumer
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             var httpClient = new HttpClient();
-            var urlApiContagem = _configuration["UrlApiContagem"];
+            var urlApiContagem = _configuration["UrlApiCounter"];
 
             while (!stoppingToken.IsCancellationRequested)
             {

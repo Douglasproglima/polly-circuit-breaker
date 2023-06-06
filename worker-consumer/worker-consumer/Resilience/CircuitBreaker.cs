@@ -6,11 +6,16 @@ namespace worker_consumer.Resilience
 {
     public static class CircuitBreaker
     {
+        private static readonly int
+            _NUMBER_ERRORS = 5,
+            _INTERVALS_REQUEST = 10;
+            
+
         public static AsyncCircuitBreakerPolicy CreatePolicy()
         {
             return Policy
                 .Handle<Exception>()
-                .CircuitBreakerAsync(5, TimeSpan.FromSeconds(10),
+                .CircuitBreakerAsync(_NUMBER_ERRORS, TimeSpan.FromSeconds(_INTERVALS_REQUEST),
                     onBreak: (_, _) =>
                     {
                         ShowCircuitState("Open (onBreak)", ConsoleColor.Red);
